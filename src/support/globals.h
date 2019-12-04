@@ -20,11 +20,11 @@ void log_set_config(void *config);
 void *global_default_config(void);
 void global_set_config(void *config);
 
-// void *global_default_load(void);
-// void global_set_load(void *load);
-
 void *global_default_argv(void);
 void global_set_argv(void *argv);
+
+void *global_default_core(void);
+void global_set_core(void *core);
 
 #ifdef __cplusplus
 }
