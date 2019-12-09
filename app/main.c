@@ -13,6 +13,8 @@
 #include <getopt.h>
 #include <sys/wait.h>
 
+#include "avc.h"
+
 #define SW_VERSION  "v1.0"
 
 int main(int argc, char **argv)
@@ -51,11 +53,11 @@ int main(int argc, char **argv)
     printf("type: %s\n", type);
     //signal(SIGCHLD, handler);
 
-    load_init(argc, argv);
+    avc_init(argc, argv);
 
-    load_start();
+    avc_start();
 
-    load_done();
+    avc_done();
 
     return (0);
 }

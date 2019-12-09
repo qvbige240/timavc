@@ -10,6 +10,8 @@
 
 #include "avc_typedef.h"
 
+#include "avc_demo.h"
+
 VMP_BEGIN_DELS
 
 typedef struct avc_core_t

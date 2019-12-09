@@ -24,4 +24,3 @@ libavc_la_SOURCES=\
     $(pkg_include_HEADERS)
 
 libavc_la_LDFLAGS = -version-info $(LIBAVC_VERSION_INFO) $(LDFLAGS_NOUNDEFINED)
-
