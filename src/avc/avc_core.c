@@ -54,6 +54,8 @@ static void *avc_core_thread(void *arg)
 {
     PrivInfo *thiz = (PrivInfo *)arg;
 
+    task_demo_start(thiz);
+
     while (thiz->cond)
     {
         sleep(5);

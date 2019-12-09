@@ -93,5 +93,5 @@ m4
 autom4te.cache/
 autoscan.log
 compile
-
-����*
+COPYING
+INSTALL

@@ -91,7 +91,8 @@ CheckSqlite3()
         AC_SUBST(SQLITE3_LIBS)
     fi
 
-    AM_CONDITIONAL(HAVE_SQLITE3, [test "$enable_sqlite3" = "yes"])
+    #AM_CONDITIONAL(HAVE_SQLITE3, [test "$enable_sqlite3" = "yes"])
+    #AM_CONDITIONAL(HAVE_SQLITE3, test "$enable_sqlite3" = "yes")
 }
 
 ## zlog config
@@ -130,7 +131,7 @@ CheckNmon()
         AC_SUBST(NMON_LIBS)
     fi
 
-    AM_CONDITIONAL(NMON, [test "$enable_nmon" = "yes"])
+    #AM_CONDITIONAL(NMON, [test "$enable_nmon" = "yes"])
 }
 
 ## protobuf-c config
@@ -181,6 +182,11 @@ if test x$platform = xnt966x; then
     echo "nt966x compile"
 
     DYNAMIC_LIBS="-lc"
+elif test x$platform = xx86; then
+    AC_DEFINE(X86, 1, [x86])
+    PF_TARGET="X86"
+    echo "x86 compile"
+    DYNAMIC_LIBS="-lc"
 elif test x$platform = xubuntu; then
     AC_DEFINE(X86_UBUNTU, 1, [ubuntu])
     PF_TARGET="X86_UBUNTU"
@@ -226,6 +232,7 @@ echo "LDFLAGS: $LDFLAGS"
 echo "platform: $PF_TARGET"
 echo "platform11111: ${PF_TARGET}"
 echo 'platform22222: $(PF_TARGET)'
+AM_CONDITIONAL(X86, test x$PF_TARGET = xX86)
 AM_CONDITIONAL(X86_UBUNTU, test x$PF_TARGET = xX86_UBUNTU)
 AM_CONDITIONAL(X86_CENTOS, test x$PF_TARGET = xX86_CENTOS)
 AM_CONDITIONAL(MIPS_NT966X, test x${PF_TARGET} = xMIPS_NT966X)
@@ -244,6 +251,5 @@ AC_CHECK_FUNCS([gethostname getmntent gettimeofday strstr uname])
 
 AC_CONFIG_FILES([Makefile
                  app/Makefile
-                 samples/Makefile
                  src/Makefile])
 AC_OUTPUT

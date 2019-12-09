@@ -5,6 +5,8 @@
  *
  */
 
+#include <unistd.h>
+
 #include "avc.h"
 #include "avc_core.h"
 

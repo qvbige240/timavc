@@ -5,6 +5,10 @@
  *
  */
 
+#include <unistd.h>
+#include <stdbool.h>
+#include <pthread.h>
+
 #include "avc_demo.h"
 
 typedef struct _PrivInfo
@@ -40,13 +44,13 @@ static void *avc_demo_thread(void *arg)
     return NULL;
 }
 
-static int avc_demo_start(PrivInfo *thiz)
+int avc_demo_start(void *p)
 {
     int ret = 0;
     pthread_mutexattr_t attr;
+    PrivInfo *thiz = p;
 
-    if (!thiz)
-        return -1;
+    if (!thiz) return -1;
 
     if (pthread_mutexattr_init(&attr) != 0)
         goto fail;
@@ -62,7 +66,7 @@ static int avc_demo_start(PrivInfo *thiz)
     return 0;
 
 fail:
-    avc_demo_done();
+    avc_demo_done(thiz);
     return -1;
 }
 
@@ -78,7 +82,7 @@ static int avc_demo_stop(PrivInfo *thiz)
     if (thiz->initialized)
     {
         thiz->initialized = false;
-        pthread_join(thiz->core_thread, &thread_result);
+        pthread_join(thiz->thread, &thread_result);
     }
 
     return 0;
